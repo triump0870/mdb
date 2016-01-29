@@ -21,6 +21,11 @@ loaders = [
 TEMPLATES[0]['OPTIONS'].update({"loaders": loaders})
 TEMPLATES[0].update({"APP_DIRS": False})
 
+# production based apps
+INSTALLED_APPS += (
+                   'storages',
+                   'boto',
+)
 # Define STATIC_ROOT for the collectstatic command
 STATIC_ROOT = join(BASE_DIR, '..', 'site', 'static')
 
