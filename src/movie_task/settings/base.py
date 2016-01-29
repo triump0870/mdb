@@ -98,11 +98,6 @@ WSGI_APPLICATION = 'movie_task.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    # Raises ImproperlyConfigured exception if DATABASE_URL not in
-    # os.environ
-    'default': env.db(),
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
