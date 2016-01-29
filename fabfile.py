@@ -6,7 +6,7 @@ def deploy():
     comment = raw_input()
     local(' git commit -m "%s"'%comment)
     local('git push origin master')
-    # local('heroku maintenance:on')
-    # local('git push heroku master')
-    # local('heroku maintenance:off')
+    local('heroku maintenance:on')
+    local('git push heroku master')
+    local('heroku maintenance:off')
 
