@@ -21,6 +21,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Show thumbnail generation errors
 THUMBNAIL_DEBUG = True
 
+# Define STATIC_ROOT for the collectstatic command
+STATIC_ROOT = join(BASE_DIR, '..', 'site', 'static')
+
 # Log everything to the logs directory at the top
 LOGFILE_ROOT = join(dirname(BASE_DIR), 'logs')
 
