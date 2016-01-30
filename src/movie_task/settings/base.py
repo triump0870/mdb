@@ -78,6 +78,8 @@ INSTALLED_APPS = (
 
     'profiles',
     'accounts',
+    'api',
+    'movie',
 
 )
 

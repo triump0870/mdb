@@ -17,13 +17,13 @@
     <div class="row">
       <div class="col-md-12 text-center">
         <h1>{% include "_brandname.html" %}</h1>
-        <p class="lead">An Awesome Tagline Goes Here</p>
+        <p class="lead">Movie API Project</p>
       </div>
     </div>
   </div>
 </div>
 
-<div id="sec2" class="text-page">
+<!-- <div id="sec2" class="text-page">
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
@@ -53,9 +53,9 @@
     </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<div id="sec3">
+<!-- <div id="sec3">
   <div class="container">
     <div class="row">
       <div id="map-outer" class="col-md-12">
@@ -74,31 +74,31 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 {% endblock container %}
 
 {% block scripts %}
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <!--script src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script>
 
-   function init_map() {
-     // Enter the latitude and longitude of your office here
-	 var myLocation = new google.maps.LatLng(27.176141, 78.042370);
+  //  function init_map() {
+  //    // Enter the latitude and longitude of your office here
+	 // var myLocation = new google.maps.LatLng(27.176141, 78.042370);
 
-     var mapOptions = {
-          center: myLocation,
-          zoom: 14
-     };
+  //    var mapOptions = {
+  //         center: myLocation,
+  //         zoom: 14
+  //    };
 
-	 var marker = new google.maps.Marker({
-	   position: myLocation,
-	   title:"We are here"});
+	 // var marker = new google.maps.Marker({
+	 //   position: myLocation,
+	 //   title:"We are here"});
 
-     var map = new google.maps.Map(document.getElementById("map-container"),
-                                   mapOptions);
-	 marker.setMap(map);
-   }
+  //    var map = new google.maps.Map(document.getElementById("map-container"),
+  //                                  mapOptions);
+	 // marker.setMap(map);
+  //  }
 
-   google.maps.event.addDomListener(window, 'load', init_map);
-  </script>
+  //  google.maps.event.addDomListener(window, 'load', init_map);
+  // </script-->
 {% endblock scripts %}

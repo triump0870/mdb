@@ -21,11 +21,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Database setting for local development
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'movie_task',
-            'HOST': 'localhost',
-            'USER': 'postgres',
-            'PASSWORD': 'Movie@0870'
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME':join(BASE_DIR,'db.sqlite3')
+            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            # 'NAME': 'movie_task',
+            # 'HOST': 'localhost',
+            # 'USER': 'postgres',
+            # 'PASSWORD': 'Movie@0870'
 
     }
 }
