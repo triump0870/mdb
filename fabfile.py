@@ -1,6 +1,11 @@
 from fabric.api import local
 import os
 
+def heroku():
+    local('heroku maintenance:on')
+    local('git push heroku master')
+    local('heroku maintenance:off')
+ 
 def deploy():
     local('git add -u')
     print "Enter the git commit comment: "
