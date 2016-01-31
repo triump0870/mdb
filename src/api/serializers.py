@@ -1,6 +1,14 @@
 from rest_framework import serializers
 from movie.models import Movie, Genre
 import six
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+    movies_list = serializers.PrimaryKeyRelatedField(many=True,read_only=True, source='movies')
+    class Meta:
+        model = User
+        fields = ('id','name','email','movies_list')
 
 class CustomPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
     def to_representation(self, value):
@@ -13,9 +21,10 @@ class CustomPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
 class MovieSerializer(serializers.ModelSerializer):
     # genres = GenreField(queryset=Genre.objects.all(),many=True,source='genre', read_only=False)
     genres = CustomPrimaryKeyRelatedField(queryset=Genre.objects.all(), many=True, source='genre')
+    owner = serializers.ReadOnlyField(source='owner.email')
     class Meta:
         model = Movie
-        fields = ('popularity', 'director','imdb_score','genres', 'name')
+        fields = ('id','popularity', 'director','imdb_score','genres', 'name', 'owner')
 
     # def create(self, validated_data):
     #     popularity_data = validated_data['popularity']

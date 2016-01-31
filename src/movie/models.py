@@ -1,6 +1,7 @@
 from django.db import models
-
+from django.conf import settings
 # Create your models here.
+User = settings.AUTH_USER_MODEL
 
 class Genre(models.Model):
     genre = models.CharField(max_length=30)
@@ -15,7 +16,7 @@ class Movie(models.Model):
     genre = models.ManyToManyField(Genre)
     imdb_score = models.FloatField()
     popularity = models.FloatField()
-    # owner = models.ForeignKey('auth.User')
+    owner = models.ForeignKey(User, related_name='movies')
 
 
     def __unicode__(self):
