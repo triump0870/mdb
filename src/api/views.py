@@ -32,11 +32,7 @@ class MovieListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-    # def get(self, request):
-    #     serializer =self.serializer_class(self.get_queryset(), many=True)
-    #     return Response(serializer.data)
-
-class MovieDetailView(generics.RetrieveUpdateDestroyAPIView):
+class MovieDetailView(generics.UpdateAPIView):
     """
     Show the Movie dretails.
     """
@@ -45,18 +41,15 @@ class MovieDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_class = (permissions.IsAuthenticatedOrReadOnly,
                                     IsOwnerOrReadOnly,)
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
-
-class UserList(generics.ListAPIView):
+class UserListView(generics.ListAPIView):
     """
     List all the Users
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class UserDetial(generics.RetrieveAPIView):
+class UserDetailView(generics.RetrieveAPIView):
     """
     Show the current user details.
     """

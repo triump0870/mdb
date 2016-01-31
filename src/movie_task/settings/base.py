@@ -41,6 +41,11 @@ TEMPLATES = [
     },
 ]
 
+# Django Rest Settings
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
+
 # Use 12factor inspired environment variables or from a file
 import environ
 env = environ.Env()
