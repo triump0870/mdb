@@ -7,3 +7,4 @@ urlpatterns = [
     url(r'^(?P<slug>[\w\-]+)$', views.ShowProfile.as_view(),
         name='show'),
 ]
+
