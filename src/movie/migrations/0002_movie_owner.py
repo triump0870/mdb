@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='movie',
             name='owner',
-            field=models.ForeignKey(default=1, to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(related_name='movies', default=1, to=settings.AUTH_USER_MODEL),
             preserve_default=False,
         ),
     ]
