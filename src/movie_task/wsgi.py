@@ -11,7 +11,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "movie_task.settings.production"
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
-
 # Wrap werkzeug debugger if DEBUG is on
 # from django.conf import settings
 # if settings.DEBUG:
