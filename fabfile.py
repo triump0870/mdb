@@ -1,10 +1,11 @@
 from fabric.api import local
 import os
+def git():
+    local('git pull origin master')
 
 def heroku():
     local('heroku maintenance:on --app movie-task')
     local('git push heroku master')
-    local('heroku run python src/manage.py collectstatic --nnoinput')
     local('heroku run python src/manage.py makemigrations')
     local('heroku run python src/manage.py migrate')
 
@@ -18,7 +19,6 @@ def deploy():
     local('git push origin master')
     local('heroku maintenance:on --app movie-task')
     local('git push heroku master')
-    local('heroku run python src/manage.py collectstatic --nnoinput')
     local('heroku run python src/manage.py makemigrations')
     local('heroku run python src/manage.py migrate')
     local('heroku maintenance:off --app movie-task')
