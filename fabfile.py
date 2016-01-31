@@ -7,7 +7,7 @@ def heroku():
     local('heroku maintenance:off --app movie-task')
  
 def deploy():
-    local('git add -u')
+    local('git add .')
     print "Enter the git commit comment: "
     comment = raw_input()
     local(' git commit -m "%s"'%comment)
@@ -50,7 +50,7 @@ def dump():
     local("heroku pg:backups restore '%s' DATABASE_URL --confirm movie-task"%(S3_URL))
 
 def local_deploy():
-    local('git add -u')
+    local('git add .')
     comment = raw_input("Enter the commit comment: ")
     local('git commit -m "%s"'%comment)
     local('git push origin master')
