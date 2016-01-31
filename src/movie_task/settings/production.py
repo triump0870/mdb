@@ -4,7 +4,7 @@ from .base import *             # NOQA
 import logging.config
 
 # For security and performance reasons, DEBUG is turned off
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['movie-task.herokuapp.com']
 
