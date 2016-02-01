@@ -20,7 +20,12 @@ class CustomPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
         return item.pk
 
 class MovieSerializer(serializers.ModelSerializer):
-    genres = CustomPrimaryKeyRelatedField(queryset=Genre.objects.all(), many=True, source='genre')
+    genres = serializers.SlugRelatedField(
+                                        queryset=Genre.objects.all(),
+                                        many=True,
+                                        slug_field='genre',
+                                        source='genre')
+
     url = serializers.HyperlinkedIdentityField(view_name='api:movie-detail')
     owner = serializers.ReadOnlyField(source='owner.email')
     class Meta:
