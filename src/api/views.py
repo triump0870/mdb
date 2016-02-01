@@ -44,39 +44,3 @@ class MovieViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-class MovieListView(generics.ListCreateAPIView):
-    """
-    List all the Movies, or create a new Movie.
-    """
-    queryset = Movie.objects.all()
-    serializer_class = MovieSerializer
-    permission_class = (permissions.IsAuthenticatedOrReadOnly,
-                                    IsOwnerOrReadOnly,)
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
-class MovieDetailView(generics.UpdateAPIView):
-    """
-    Show the Movie dretails.
-    """
-    queryset = Movie.objects.all()
-    serializer_class = MovieSerializer
-    permission_class = (permissions.IsAuthenticatedOrReadOnly,
-                                    IsOwnerOrReadOnly,)
-
-
-class UserListView(generics.ListAPIView):
-    """
-    List all the Users
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class UserDetailView(generics.RetrieveAPIView):
-    """
-    Show the current user details.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
