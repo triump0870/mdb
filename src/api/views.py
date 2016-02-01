@@ -10,6 +10,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import permissions
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
+from rest_framework import viewsets
+from rest_framework.decorators import detail_route
 # from rest_framework import mixins
 # Create your views here.
 User = get_user_model()
@@ -20,6 +22,28 @@ def api_root(request, format=None):
                     'users': reverse('api:user-list', request=request, format=format),
                     'movies': reverse('api:movie-list', request=request,format=format)
                     })
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail`actions
+    for the User model.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class MovieViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`
+    `update` and `destroy` actions.
+    """
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    permission_class = (permissions.IsAuthenticatedOrReadOnly,
+                                    IsOwnerOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 class MovieListView(generics.ListCreateAPIView):
     """
     List all the Movies, or create a new Movie.
