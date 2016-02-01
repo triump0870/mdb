@@ -29,11 +29,6 @@ def deploy():
 def runserver():
     local('python src/manage.py runserver 0.0.0.0:8000')
 
-def migrate():
-    local('python src/manage.py makemigrations')
-    local('python src/manage.py migrate')
-    local('python src/manage.py collectstatic')
-
 def dump():
     from os.path import join,dirname,exists
     import environ
@@ -59,7 +54,7 @@ def dump():
     local('aws s3 cp %s.dump %s'%(DATABASE_NAME, S3_UPLOAD_URL))
     local("heroku pg:backups restore '%s' DATABASE_URL --confirm movie-task"%(S3_URL))
 
-def local_deploy():
+def aws():
     local('git add .')
     comment = raw_input("Enter the commit comment: ")
     local('git commit -m "%s"'%comment)
