@@ -12,6 +12,8 @@ from rest_framework.reverse import reverse
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route
 from rest_framework import filters
+from django.core.exceptions import PermissionDenied
+
 # from rest_framework import mixins
 # Create your views here.
 User = get_user_model()
@@ -43,6 +45,8 @@ class MovieViewSet(viewsets.ModelViewSet):
     filter_class = MovieFilter
 
     def perform_create(self, serializer):
+        if not self.request.user.is_authenticated():
+            raise PermissionDenied
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
@@ -55,4 +59,9 @@ class MovieViewSet(viewsets.ModelViewSet):
             for i in q:
                 queryset = queryset.filter(genre=i)
         return queryset
+
+
+
+
+
 
