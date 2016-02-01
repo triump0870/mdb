@@ -21,7 +21,8 @@ class CustomPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
 
 class MovieSerializer(serializers.ModelSerializer):
     genres = CustomPrimaryKeyRelatedField(queryset=Genre.objects.all(), many=True, source='genre')
+    url = serializers.HyperlinkedIdentityField(view_name='api:movie-detail')
     owner = serializers.ReadOnlyField(source='owner.email')
     class Meta:
         model = Movie
-        fields = ('id','popularity', 'director','imdb_score','genres', 'name', 'owner')
+        fields = ('url','popularity', 'director','imdb_score','genres', 'name', 'owner')
