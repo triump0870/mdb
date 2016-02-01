@@ -25,4 +25,4 @@ class MovieSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.email')
     class Meta:
         model = Movie
-        fields = ('url','popularity', 'director','imdb_score','genres', 'name', 'owner')
+        fields = ('url','name', 'director','genres','release','imdb_score', 'popularity','owner')

@@ -1,27 +1,26 @@
-from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework import generics
-from movie.models import Movie
+from movie.models import Movie, Genre
 from api.permissions import IsOwnerOrReadOnly
 from api.serializers import MovieSerializer, UserSerializer
+
+import django_filters
+
 from django.contrib.auth import get_user_model
+
 from rest_framework import permissions
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route
+from rest_framework import filters
 # from rest_framework import mixins
 # Create your views here.
 User = get_user_model()
 
-@api_view(('GET',))
-def api_root(request, format=None):
-    return Response({
-                    'users': reverse('api:user-list', request=request, format=format),
-                    'movies': reverse('api:movie-list', request=request,format=format)
-                    })
+class MovieFilter(django_filters.FilterSet):
+    class Meta:
+        model = Movie
+        fields = ['name', 'director']
+
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -40,7 +39,22 @@ class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
     permission_class = (permissions.IsAuthenticatedOrReadOnly,
                                     IsOwnerOrReadOnly,)
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = MovieFilter
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        queryset = Movie.objects.all()
+        genre = self.request.query_params.get('genre',None)
+        print genre
+        if genre is not None:
+            print genre.split(',')
+            q = []
+            for i in genre.split(','):
+                q.append(Genre.objects.filter(genre__contains=i))
+            for i in q:
+                queryset = queryset.filter(genre=i)
+        return queryset
 

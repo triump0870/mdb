@@ -1,5 +1,4 @@
 from django.conf.urls import url, patterns, include
-from api.views import MovieListView, MovieDetailView, UserListView, UserDetailView, api_root
 from .views import UserViewSet, MovieViewSet
 from rest_framework.routers import DefaultRouter
 

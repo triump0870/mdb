@@ -43,6 +43,7 @@ TEMPLATES = [
 
 # Django Rest Settings
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
     'PAGE_SIZE': 10
 }
 
