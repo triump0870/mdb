@@ -6,9 +6,10 @@ movie_task is a _short description_. It is built with [Python][0] using the [Dja
 
 This project has the following basic apps:
 
-* App1 (short desc)
-* App2 (short desc)
-* App3 (short desc)
+* API
+* Movie
+* Account
+* Profile
 
 ## Installation
 

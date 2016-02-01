@@ -1,16 +1,21 @@
 from fabric.api import local
 import os
+
+def migrate():
+    local('heroku maintenance:on --app movie-task')
+    local('heroku run python src/manage.py makemigrations')
+    local('heroku run python src/manage.py migrate')
+    local('heroku maintenance:off --app movie-task')
+
+
 def git():
     local('git pull origin master')
 
 def heroku():
     local('heroku maintenance:on --app movie-task')
     local('git push heroku master')
-    local('heroku run python src/manage.py makemigrations')
-    local('heroku run python src/manage.py migrate')
-
     local('heroku maintenance:off --app movie-task')
- 
+
 def deploy():
     local('git add .')
     print "Enter the git commit comment: "
