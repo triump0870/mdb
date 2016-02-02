@@ -12,11 +12,11 @@ class Genre(models.Model):
 class Movie(models.Model):
     name = models.CharField(max_length=255)
     director = models.CharField(max_length=255)
-    genre = models.ManyToManyField(Genre)
+    genre = models.ManyToManyField(Genre, null=False, blank=False)
     release = models.DateField(editable=True)
     imdb_score = models.FloatField()
     popularity = models.IntegerField()
-    owner = models.ForeignKey(User, related_name='movies')
+    owner = models.ForeignKey(User, related_name='movies', null=False, blank=False)
 
 
     def __unicode__(self):
