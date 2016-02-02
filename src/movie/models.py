@@ -15,7 +15,7 @@ class Movie(models.Model):
     genre = models.ManyToManyField(Genre)
     release = models.DateField(editable=True)
     imdb_score = models.FloatField()
-    popularity = models.FloatField()
+    popularity = models.IntegerField()
     owner = models.ForeignKey(User, related_name='movies')
 
 

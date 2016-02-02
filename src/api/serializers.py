@@ -37,15 +37,6 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = ('url','name', 'director','genres','release','imdb_score', 'popularity','owner')
 
-    # def validate(self, data):
-    #     """
-    #     Validates the incoming data.
-    #     """
-    #     name = data['name']
-    #     director = data['director']
-    #     if not re.match(r'[A-Za-z]',name):
-    #         raise serializers.ValidationError("")
-
     def validate(self, data):
         """
         Validates the data comes with the request.

@@ -19,9 +19,20 @@ from django.core.exceptions import PermissionDenied
 User = get_user_model()
 
 class MovieFilter(django_filters.FilterSet):
+    """
+    It filters queryset based on the query parameter `name`, `director`, `imdb_score` and `popularity`.
+
+    imdb_score is again divided into two query parameter, `min_imdb` and `max_imdb`
+
+    min_imdb will return the objects which have atleast or greater imdb_score than the specified imdb_score
+
+    max_imdb will return the objects which have atmost or less than the specified imdb_score.
+    """
+    min_imdb = django_filters.NumberFilter(name='imdb_score', lookup_type='gte')
+    max_imdb = django_filters.NumberFilter(name='imdb_score', lookup_type='lte')
     class Meta:
         model = Movie
-        fields = ['name', 'director']
+        fields = ['name', 'director','min_imdb','max_imdb','popularity']
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -45,11 +56,18 @@ class MovieViewSet(viewsets.ModelViewSet):
     filter_class = MovieFilter
 
     def perform_create(self, serializer):
+        """
+        Checks the requested user is a valid user or not.
+        """
         if not self.request.user.is_authenticated():
             raise PermissionDenied
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
+        """
+        Filters the queryset on the query parameter `genre`
+        and returns the filtered queryset.
+        """
         queryset = Movie.objects.all()
         genre = self.request.query_params.get('genre',None)
         if genre is not None:
