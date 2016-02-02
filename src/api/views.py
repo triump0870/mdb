@@ -13,6 +13,7 @@ from rest_framework.reverse import reverse
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route
 from rest_framework import filters
+from rest_framework import serializers
 from django.core.exceptions import PermissionDenied
 
 # from rest_framework import mixins
@@ -62,6 +63,8 @@ class MovieViewSet(viewsets.ModelViewSet):
         """
         if not self.request.user.is_authenticated():
             raise PermissionDenied
+        if 'genres' not in self.request.data:
+            raise serializers.ValidationError({'genres':"genres field can't be empty"})
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
