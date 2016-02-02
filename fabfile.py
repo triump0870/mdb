@@ -1,6 +1,9 @@
 from fabric.api import local
 import os
 
+def untrack():
+    local('git add -A')
+
 def migrate():
     local('heroku maintenance:on --app movie-task')
     local('heroku run python src/manage.py makemigrations')
