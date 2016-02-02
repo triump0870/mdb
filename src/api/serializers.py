@@ -4,6 +4,10 @@ import six
 import re
 from django.contrib.auth import get_user_model
 User = get_user_model()
+def match(field,value):
+        if not re.match(r'[A-Za-z]', value):
+            raise serializers.ValidationError({field:"%s should be valid string characters"%field})
+        return value
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='api:user-detail')
@@ -41,28 +45,18 @@ class MovieSerializer(serializers.ModelSerializer):
     #     director = data['director']
     #     if not re.match(r'[A-Za-z]',name):
     #         raise serializers.ValidationError("")
-    def validate_owner(self, value):
-        """
-        Check if the user is a valid user or not.
-        """
-        if not value.is_authenticated():
-            raise serializers.ValidationError("User need to be a valid user to create Movie Instance")
-        return value
 
-    def validate_name(self, value):
+    def validate(self, data):
         """
-        Check that the director contains only valid string characters.
+        Validates the data comes with the request.
         """
-        if not re.match('[A-Za-z]',value):
-            raise serializers.ValidationError("Name should be valid string characters")
-        return value
-
-    def validate_director(self, value):
-        """
-        Check that the director contains only valid string characters.
-        """
-        if not re.match('[A-Za-z]',value):
-            raise serializers.ValidationError("Name should be valid string characters")
-        return value
-
+        name = match('name',data['name'])
+        director = match('director',data['director'])
+        imdb = data['imdb_score']
+        popularity = data['popularity']
+        if not 1<=imdb<=10:
+            raise serializers.ValidationError({'imdb_score':"Invalid IMDB score"})
+        if not 1<=popularity<=100:
+            raise serializers.ValidationError({"popularity":"Invalid POPULARITY score"})
+        return data
 
