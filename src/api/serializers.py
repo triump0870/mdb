@@ -3,7 +3,9 @@ from movie.models import Movie, Genre
 import six
 import re
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
+
 def match(field,value):
         if not re.match(r'[A-Za-z]', value):
             raise serializers.ValidationError({field:"%s should be valid string characters"%field})
@@ -11,7 +13,7 @@ def match(field,value):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='api:user-detail')
-    movies = serializers.HyperlinkedIdentityField(view_name="api:movie-detail")
+    movies = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name="api:movie-detail")
     class Meta:
         model = User
         fields = ('url','name','email','movies')

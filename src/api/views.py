@@ -6,6 +6,7 @@ import django_filters
 
 from django.contrib.auth import get_user_model
 
+from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
@@ -77,6 +78,22 @@ class MovieViewSet(viewsets.ModelViewSet):
             for i in q:
                 queryset = queryset.filter(genre=i)
         return queryset
+
+    def update(self, request, *args, **kwargs):
+        """
+        check while the updation of the instance the requesting user and the owner of
+        the instance are same or not.
+        """
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        if not instance.owner == request.user:
+            raise PermissionDenied
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+
 
 
 
