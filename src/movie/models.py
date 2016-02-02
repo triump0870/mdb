@@ -16,7 +16,7 @@ class Movie(models.Model):
     release = models.DateField(editable=True)
     imdb_score = models.FloatField()
     popularity = models.IntegerField()
-    owner = models.ForeignKey(User, related_name='movies', null=False, blank=False)
+    owner = models.ForeignKey(User, related_name='movies', null=False, blank=False,on_delete=models.CASCADE)
 
 
     def __unicode__(self):
