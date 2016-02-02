@@ -55,7 +55,7 @@ class MovieViewSet(viewsets.ModelViewSet):
         if genre is not None:
             q = []
             for i in genre.split(','):
-                q.append(Genre.objects.filter(genre__contains=i))
+                q.append(Genre.objects.filter(genre=i.title()))
             for i in q:
                 queryset = queryset.filter(genre=i)
         return queryset
