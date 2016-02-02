@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from movie.models import Movie, Genre
 import six
+import re
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -31,3 +32,37 @@ class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = ('url','name', 'director','genres','release','imdb_score', 'popularity','owner')
+
+    # def validate(self, data):
+    #     """
+    #     Validates the incoming data.
+    #     """
+    #     name = data['name']
+    #     director = data['director']
+    #     if not re.match(r'[A-Za-z]',name):
+    #         raise serializers.ValidationError("")
+    def validate_owner(self, value):
+        """
+        Check if the user is a valid user or not.
+        """
+        if not value.is_authenticated():
+            raise serializers.ValidationError("User need to be a valid user to create Movie Instance")
+        return value
+
+    def validate_name(self, value):
+        """
+        Check that the director contains only valid string characters.
+        """
+        if not re.match('[A-Za-z]',value):
+            raise serializers.ValidationError("Name should be valid string characters")
+        return value
+
+    def validate_director(self, value):
+        """
+        Check that the director contains only valid string characters.
+        """
+        if not re.match('[A-Za-z]',value):
+            raise serializers.ValidationError("Name should be valid string characters")
+        return value
+
+
