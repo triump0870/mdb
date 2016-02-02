@@ -89,7 +89,7 @@ If an unauthenticated / Anonymous user tries to create a Movie instance the foll
         "detail": "Permission denied."
     }
 
-Filter can be applied on the following parameters:
+Filter can be applied on the following fields:
 
 > **`name`** -- `https://movie-task.herokuapp.com/api/movies/?name="Toy Story"`
 >
