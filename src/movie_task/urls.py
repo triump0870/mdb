@@ -20,3 +20,7 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns +=[
     url(r'^api-auth/', include('rest_framework.urls',namespace='rest_framework')),
 ]
+urlpatterns += [
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT})
+]
