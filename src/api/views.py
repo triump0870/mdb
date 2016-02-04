@@ -5,7 +5,7 @@ from api.serializers import MovieSerializer, UserSerializer
 import django_filters
 
 from django.contrib.auth import get_user_model
-
+from django.middleware import csrf
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.decorators import api_view
@@ -72,6 +72,8 @@ class MovieViewSet(viewsets.ModelViewSet):
         Filters the queryset on the query parameter `genre`
         and returns the filtered queryset.
         """
+        print csrf.get_token(self.request)
+
         queryset = Movie.objects.all()
         genre = self.request.query_params.get('genre',None)
         if genre is not None:
