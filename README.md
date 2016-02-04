@@ -70,7 +70,7 @@ The JSON object returned would look like:
 To create a Movie instance a request from an authenticated user would be like:
 
     curl -H 'X-application/json'
-    -X POST https://movie-task.herokuapp.com/api/movies/ -u temp@temp.com:PASSWORD
+    -X POST https://movie-task.herokuapp.com/api/movies/ -u temp@temp.com:temp
     -d "name=The Dark Night&director=Christopher Nolan&imdb_score=9&popularity=82&release=2008-07-18&genres=Drama&genres=Action&genres=Crime"
 
 The returned response would be like:
