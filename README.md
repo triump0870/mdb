@@ -35,7 +35,13 @@ Take a look at the docs for more information.
 
 API Documentation
 ------------------------
-This is Fynd Movie Task API resource documatation.
+This is Fynd Movie Task API resource documatation. To test the APIs use these demo users
+
+    username: temp@temp.com
+    password: temp
+
+  username: demo@demo.com
+  password: demo
 
 The API provides endpoints for movies and users. It can be accessed via a simple API call.
 
@@ -44,43 +50,45 @@ The API defines the following endpoints:
 > * https://movie-task.herokuapp.com/users/
 > * https://movie-task.herokuapp.com/movies/
 
-In case of a successful users request like,
+In case of an user request like,
 
-> * https://movie-task.herokuapp.com/api/users/1/
+    curl -v -H 'X-application/json' GET https://movie-task.herokuapp.com/api/users/1/
 
-the JSON object returned looks like:
+The JSON object returned would look like:
 
+    HTTP 200 OK
+    Content-Type: application/json
+    Vary: Accept
+    Allow: GET, HEAD, OPTIONS
     {
-    "url": "http://localhost:8000/api/users/1/"
-    "name": "Rohan",
-    "email": "b4you0870@gmail.com",
-    "movies": "http://localhost:8000/api/movies/1/"
-    }
+     "url": "http://localhost:8000/api/users/1/"
+     "name": "Rohan",
+     "email": "b4you0870@gmail.com",
+     "movies": "http://localhost:8000/api/movies/1/"
+     }
 
-In case of a successful movies request like,
+To create a Movie instance a request from an authenticated user would be like:
 
-> https://movie-task.herokuapp.com/api/movies/1/
+    curl -H 'X-application/json'
+    -X POST https://movie-task.herokuapp.com/api/movies/ -u temp@temp.com:PASSWORD
+    -d "name=The Dark Night&director=Christopher Nolan&imdb_score=9&popularity=82&release=2008-07-18&genres=Drama&genres=Action&genres=Crime"
 
-the JSON object returned looks like,
+The returned response would be like:
 
-    {
-    "url": "http://movie-task.herokuapp.com/api/movies/1/",
-    "name": "Toy Story",
-    "director": "John Lasseter",
-    "genres": [
-    "Adventure",
-    "Comedy",
-    "Animation"
-    ],
-    "release": "2016-02-01",
-    "imdb_score": 8.3,
-    "popularity": 99.0,
-    "owner": "b4you0870@gmail.com"
-    }
+    POST /api/movies/ HTTP/1.1
+    HTTP/1.1 201 CREATED
+    Host: movie-task.herokuapp.com
+    Content-Length: 132
+    Content-Type: application/json
+    Location: http://movie-task.herokuapp.com/api/movies/21/
+    Allow: GET, POST, HEAD, OPTIONS
 
-If an unauthenticated / Anonymous user tries to create a Movie instance the following response will be generated
+    {"url":"http://movie-task.herokuapp.com/api/movies/20/","name":"The Dark Night","director":"Christopher Nolan","genres":["Drama","Crime","Action"],"release":"2008-07-18","imdb_score":9.0,"popularity":82,"owner":"temp@temp.com"}
+
+If the user is unauthenticated then the response would be
 
     HTTP 403 Forbidden
+
     Content-Type: application/json
     Vary: Accept
     Allow: GET, POST, HEAD, OPTIONS
@@ -89,7 +97,7 @@ If an unauthenticated / Anonymous user tries to create a Movie instance the foll
         "detail": "Permission denied."
     }
 
-Filter can be applied on the following fields:
+Filter can be applied on the following parameters:
 
 > **`name`** -- `https://movie-task.herokuapp.com/api/movies/?name="Toy Story"`
 >
@@ -100,8 +108,13 @@ Filter can be applied on the following fields:
 > or
 > For multiple filter on Genre elements
 > **`genre`** -- `https://movie-task.herokuapp.com/api/movies/?genre=Animation,Comedy`
+>
+> **`min_imdb`** -- `https://movie-task.herokuapp.com/api/movies/?min_imdb=8`
+>
+> **`max_imdb`** -- `https://movie-task.herokuapp.com/api/movies/?max_imdb=8`
 
 [0]: https://www.python.org/
 [1]: https://www.djangoproject.com/
 [2]: https://movie-task.herokuapp.com/
 [3]: https://www.heroku.com/)(http://www.django-rest-framework.org/
+
