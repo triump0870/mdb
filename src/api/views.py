@@ -73,6 +73,7 @@ class MovieViewSet(viewsets.ModelViewSet):
         and returns the filtered queryset.
         """
         print csrf.get_token(self.request)
+
         queryset = Movie.objects.all()
         genre = self.request.query_params.get('genre',None)
         if genre is not None:
