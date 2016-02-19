@@ -1,5 +1,9 @@
 from fabric.api import local
-import os
+import os,sys
+
+def manage():
+    # command = raw_input("Enter manage command:")
+    local('./src/manage.py %s'%sys.argv[2])
 
 def untrack():
     local('git add -A')
