@@ -1,2 +1,1 @@
-web: python src/manage.py collectstatic --noinput
-web: python src/manage.py runserver 0.0.0.0:$PORT --noreload
+web: gunicorn movie_task:app --preload --max-request 1200 --worker-class gevent --chdir src/
