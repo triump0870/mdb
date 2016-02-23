@@ -5,19 +5,19 @@ def untrack():
     local('git add -A')
 
 def migrate():
-    local('heroku maintenance:on --app movie-task')
+    local('heroku maintenance:on')
     local('heroku run python src/manage.py makemigrations')
     local('heroku run python src/manage.py migrate')
-    local('heroku maintenance:off --app movie-task')
+    local('heroku maintenance:off')
 
 
 def git():
     local('git pull origin master')
 
 def heroku():
-    local('heroku maintenance:on --app movie-task')
-    local('git push heroku master')
-    local('heroku maintenance:off --app movie-task')
+    local('heroku maintenance:on')
+    local('git push -f heroku master')
+    local('heroku maintenance:off')
 
 def deploy():
     local('git add .')
