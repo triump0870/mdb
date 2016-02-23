@@ -6,7 +6,7 @@ import logging.config
 # For security and performance reasons, DEBUG is turned off
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['movie-task.herokuapp.com']
+ALLOWED_HOSTS = ['my-movie.herokuapp.com']
 
 # Must mention ALLOWED_HOSTS in production!
 # ALLOWED_HOSTS = ["movie_task.com"]
