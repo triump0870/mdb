@@ -25,9 +25,9 @@ def deploy():
     comment = raw_input()
     local(' git commit -m "%s"'%comment)
     local('git push origin master')
-    local('heroku maintenance:on --app movie-task')
+    local('heroku maintenance:on')
     local('git push heroku master')
-    local('heroku maintenance:off --app movie-task')
+    local('heroku maintenance:off')
 
 def runserver():
     local('python src/manage.py runserver 0.0.0.0:8000')
