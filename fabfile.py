@@ -30,7 +30,7 @@ def deploy():
     local(' git commit -m "%s"'%comment)
     local('git push origin master')
     local('heroku maintenance:on')
-    local('git push -f heroku master')
+    local('git push heroku master')
     local('heroku maintenance:off')
 
 def runserver():
