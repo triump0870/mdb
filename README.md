@@ -1,7 +1,7 @@
-# [Movie Task][2]
+# [MDB][2]
 ----------------
 
- Movie Task app is an implementation for movie searching APIs. It is built with [Python][0] using the [Django Web Framework][1] and the APIs are implemented using [Django Rest Framework]. This app is deployed in [Heroku][3].
+ MDB app is an implementation for movie searching APIs. It is built with [Python][0] using the [Django Web Framework][1] and the APIs are implemented using [Django Rest Framework]. This app is deployed in [Heroku][3].
 
 This project has the following basic apps:
 
@@ -17,7 +17,7 @@ This project has the following basic apps:
 To set up a development environment quickly, first install Python 3. It
 comes with virtualenv built-in. So create a virtual env by:
 
-1. `$ python3 -m venv movie_task`
+1. `$ python3 -m venv mdb`
 2. `$ . movie_task/bin/activate`
 
 Install all dependencies:
@@ -35,7 +35,7 @@ Take a look at the docs for more information.
 
 API Documentation
 ------------------------
-This is Fynd Movie Task API resource documatation. To test the APIs use these demo users
+To test the APIs use these demo users
 
     username: temp@temp.com
     password: temp
