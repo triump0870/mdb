@@ -43,7 +43,7 @@ def dump():
 
     # Ideally move env file should be outside the git repo
     # i.e. BASE_DIR.parent.parent
-    env_file = join(dirname('src/movie_task/settings/'), 'local.env')
+    env_file = join(dirname('src/mdb/settings/'), 'local.env')
     if exists(env_file):
         environ.Env.read_env(str(env_file))
     DATABASE_NAME = env('DB_NAME')
