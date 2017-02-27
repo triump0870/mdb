@@ -1,10 +1,11 @@
 # In production set the environment variable like this:
 #    DJANGO_SETTINGS_MODULE=mdb.settings.production
-from .base import *             # NOQA
+from .base import *  # NOQA
 import logging.config
+from utils.common import get_debug_value
 
 # For security and performance reasons, DEBUG is turned off
-DEBUG = False
+DEBUG = get_debug_value(env('DEBUG'))
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['my-movie.herokuapp.com']
 
@@ -24,8 +25,8 @@ TEMPLATES[0].update({"APP_DIRS": False})
 
 # production based apps
 INSTALLED_APPS += (
-                   'storages',
-                   'boto',
+    'storages',
+    'boto',
 )
 # Define STATIC_ROOT for the collectstatic command
 STATIC_ROOT = join(BASE_DIR, '..', 'site', 'static')
@@ -41,7 +42,8 @@ DATABASES = {
 }
 
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+
+DATABASES['default'] = dj_database_url.config()
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 

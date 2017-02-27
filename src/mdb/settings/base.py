@@ -49,6 +49,7 @@ REST_FRAMEWORK = {
 
 # Use 12factor inspired environment variables or from a file
 import environ
+
 env = environ.Env()
 
 # Ideally move env file should be outside the git repo
@@ -90,7 +91,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-        'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -125,13 +126,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = []
-
 # Crispy Form Theme - Bootstrap 3
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # For Bootstrap 3, change error alert to 'danger'
 from django.contrib import messages
+
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
@@ -141,4 +141,4 @@ AUTH_USER_MODEL = 'authtools.User'
 LOGIN_REDIRECT_URL = reverse_lazy("profiles:show_self")
 LOGIN_URL = reverse_lazy("accounts:login")
 
-THUMBNAIL_EXTENSION = 'png'     # Or any extn for your thumbnails
+THUMBNAIL_EXTENSION = 'png'  # Or any extn for your thumbnails
