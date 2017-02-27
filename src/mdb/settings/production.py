@@ -7,7 +7,7 @@ from utils.common import get_debug_value
 # For security and performance reasons, DEBUG is turned off
 DEBUG = get_debug_value(env('DEBUG'))
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['my-movie.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # Must mention ALLOWED_HOSTS in production!
 # ALLOWED_HOSTS = ["mdb.com"]
