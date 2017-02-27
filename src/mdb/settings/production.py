@@ -1,5 +1,5 @@
 # In production set the environment variable like this:
-#    DJANGO_SETTINGS_MODULE=movie_task.settings.production
+#    DJANGO_SETTINGS_MODULE=mdb.settings.production
 from .base import *             # NOQA
 import logging.config
 
@@ -9,7 +9,7 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['my-movie.herokuapp.com']
 
 # Must mention ALLOWED_HOSTS in production!
-# ALLOWED_HOSTS = ["movie_task.com"]
+# ALLOWED_HOSTS = ["mdb.com"]
 
 # Cache the templates in memory for speed-up
 loaders = [

@@ -24,7 +24,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME':join(BASE_DIR,'db.sqlite3')
             # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            # 'NAME': 'movie_task',
+            # 'NAME': 'mdb',
             # 'HOST': 'localhost',
             # 'USER': 'postgres',
             # 'PASSWORD': 'Movie@0870'

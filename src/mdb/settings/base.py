@@ -99,9 +99,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'movie_task.urls'
+ROOT_URLCONF = 'mdb.urls'
 
-WSGI_APPLICATION = 'movie_task.wsgi.application'
+WSGI_APPLICATION = 'mdb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
